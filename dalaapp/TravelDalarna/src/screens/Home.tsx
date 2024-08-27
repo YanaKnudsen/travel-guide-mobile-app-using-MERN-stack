@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AxiosInstance from "../axios/AxiosInstance.tsx";
-import store from "../mobx/AppDataStore.ts";
+import store from "../services/mobx/AppDataStore.ts";
 import {check, PERMISSIONS, RESULTS,request} from 'react-native-permissions';
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6.js";
 import PlacesCarousel from "../components/carousels/horizontal/PlacesCarousel.tsx";
@@ -221,7 +221,7 @@ function Home({navigation}): React.JSX.Element {
                     snapToInterval={CARD_WIDTH + 10}
                     snapToAlignment="center"
                     renderItem={({item, index}) => {
-                        const image_uri = "http://localhost:4000/" + item.id + "/" + item.photos[0];
+                        const image_uri = "http://localhost:4000/uploads/" + item.id + "/" + item.photos[0];
                         return (
                             <TouchableOpacity style={styles.placeView} key={index} onPress={()=>NavigateToPlacePage(item)}>
                                 <View style={{width: "100%",}}>

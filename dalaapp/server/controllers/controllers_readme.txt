@@ -1,0 +1,1 @@
+Each route or resource in your application can have its own controller file. These files contain the logic for handling requests, processing data, and generating responses.

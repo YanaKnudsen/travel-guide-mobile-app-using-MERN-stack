@@ -1,10 +1,10 @@
 import { makeAutoObservable } from "mobx";
-import {PlacesModel} from "../@types/PlacesModel.ts";
-import {CategoriesModel} from "../@types/CategoriesModel.ts";
+import {PlacesModel} from "../../@types/PlacesModel.ts";
+import {CategoriesModel} from "../../@types/CategoriesModel.ts";
 import { makePersistable,hydrateStore  } from 'mobx-persist-store';
-import {CitiesModel} from "../@types/CitiesModel.ts";
-import {LocationType} from "../@types/Locationtype.ts";
-import {MarkersModel} from "../@types/MarkersModel.ts";
+import {CitiesModel} from "../../@types/CitiesModel.ts";
+import {LocationType} from "../../@types/LocationType.ts";
+import {MarkersModel} from "../../@types/MarkersModel.ts";
 
 class AppDataStore{
     constructor() {

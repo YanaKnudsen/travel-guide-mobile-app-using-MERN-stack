@@ -14,7 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import PlacesList from "./src/screens/PlacesList.tsx";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import PlacePage from "./src/screens/PlacePage.tsx";
-import store from "./src/mobx/AppDataStore.ts";
+import store from "./src/services/mobx/AppDataStore.ts";
 import { observer } from "mobx-react";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6.js";
 

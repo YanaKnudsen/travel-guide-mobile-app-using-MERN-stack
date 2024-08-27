@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import React from "react";
-import store from "../../mobx/AppDataStore.ts";
+import store from "../../services/mobx/AppDataStore.ts";
 import { observer } from "mobx-react";
 
 

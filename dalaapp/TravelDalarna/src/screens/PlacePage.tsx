@@ -50,7 +50,7 @@ function PlacePage({route,navigation}): React.JSX.Element {
                        snapToInterval={CARD_WIDTH}
                    >
                      {placeObj.photos.map((photo, index) => {
-                         const image_uri= "http://localhost:4000/"+placeObj.id+"/"+photo;
+                         const image_uri= "http://localhost:4000/uploads/"+placeObj.id+"/"+photo;
                          console.log(image_uri);
                      return(
                          <View key={index} style={{height:"100%",width:width,backgroundColor:"#ff00ff",}}>

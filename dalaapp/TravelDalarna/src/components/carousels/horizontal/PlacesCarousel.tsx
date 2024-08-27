@@ -10,7 +10,7 @@ import {
     Dimensions, FlatList
 } from "react-native";
 import React, {useEffect} from "react";
-import store from "../../../mobx/AppDataStore.ts";
+import store from "../../../services/mobx/AppDataStore.ts";
 import { observer } from "mobx-react";
 const {height, width} = Dimensions.get('window')
 const CARD_WIDTH=width*0.8;

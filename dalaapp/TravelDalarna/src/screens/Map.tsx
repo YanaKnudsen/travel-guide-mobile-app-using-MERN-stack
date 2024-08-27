@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 //import MapView from 'react-native-maps';
 import {Marker} from 'react-native-maps';
-import store from "../mobx/AppDataStore.ts";
+import store from "../services/mobx/AppDataStore.ts";
 import SearchField from "../components/search/SearchField.tsx";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
@@ -303,6 +303,7 @@ function Map({navigation}): React.JSX.Element {
                // changeMapCoordinate(city.location[0],city.location[1]);
                 store.setRadius(10000);
                 animateToRegion(city.location[0], city.location[1],0.0922,0.0421);
+                setSearchString("");
                 return;
             }
             else{
@@ -313,6 +314,7 @@ function Map({navigation}): React.JSX.Element {
         store.setChosenCity(city);
         store.setRadius(10000);
         animateToRegion(city.location[0], city.location[1],0.0922,0.0421);
+        setSearchString("");
     }
 
     useEffect(()=>{
@@ -505,7 +507,7 @@ function Map({navigation}): React.JSX.Element {
                     snapToInterval={CARD_WIDTH+10}
                     snapToAlignment="center"
                     renderItem={({ item,index }) => {
-                        const image_uri= "http://localhost:4000/"+item.id+"/"+item.photos[0];
+                        const image_uri= "http://localhost:4000/uploads/"+item.id+"/"+item.photos[0];
                         return(
                             <TouchableOpacity style={styles.placeView} key={index} onPress={()=> {
                                 animateToRegion(item.location[0], item.location[1],0.009,0.004);

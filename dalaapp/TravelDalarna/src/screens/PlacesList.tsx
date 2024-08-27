@@ -14,7 +14,7 @@ import {
     RefreshControl,
 } from 'react-native';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import store from "../mobx/AppDataStore.ts";
+import store from "../services/mobx/AppDataStore.ts";
 import SearchField from "../components/search/SearchField.tsx";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6.js";
 import AxiosInstance from "../axios/AxiosInstance.tsx";
@@ -336,7 +336,7 @@ function PlacesList({route,navigation}): React.JSX.Element {
                 }}
                // ListFooterComponent={ListEndLoader} // Loader when loading next page.
                 renderItem={({ item,index }) => {
-                    const image_uri= "http://localhost:4000/"+item.id+"/"+item.photos[0];
+                    const image_uri= "http://localhost:4000/uploads/"+item.id+"/"+item.photos[0];
                    return (
                        <TouchableOpacity key={item.id} style={styles.placeCont} onPress={()=>NavigateToPlacePage(item)}>
                            <View style={styles.placeImage}>
