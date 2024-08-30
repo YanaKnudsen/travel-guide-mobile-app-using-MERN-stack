@@ -28,7 +28,7 @@ class AppDataStore{
     }];
     currentPosition : LocationType| null=null ;
 
-    chosenCategories: CategoriesModel | null = {
+    initChosenCategories: CategoriesModel | null = {
             nearest:false,
             fika: false,
             restaurants: false,
@@ -39,10 +39,14 @@ class AppDataStore{
             camping: false,
         };
 
+    chosenCategories: CategoriesModel | null = this.initChosenCategories;
+
     currentLat:number=0;
     currentLong:number=0;
     radius:number=25000000;
     initradius:number=25000000;
+
+    previousPage:string="";
 
     permissionGranted:boolean=false;
     hasLocationPermission:boolean=false;
@@ -87,15 +91,10 @@ class AppDataStore{
         this.hasLocationPermission = val;
     }
 
-    setPlacesFlag(val:boolean) {
-        this.placesFlag = val;
+    setPreviousPage(val:string) {
+        this.previousPage = val;
     }
-    setHomeFlag(val:boolean) {
-        this.homeFlag = val;
-    }
-    setMapFlag(val:boolean) {
-        this.mapFlag = val;
-    }
+
 
     async hydrateStore() {
         await hydrateStore(this);
