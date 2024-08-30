@@ -27,7 +27,7 @@ function CitiesCarousel({data,onEndReached,setSearchString}) {
                 contentOffset={{x: -10, y: 0}}
                 renderItem={({item,index }) => {
                     return(
-                        <TouchableOpacity style={[styles.city,{borderColor: (store.chosenCity?.name==item.name)?"#000000":"#d8d7d7", paddingHorizontal:(store.chosenCity?.name==item.name)?15:7, height:(store.chosenCity?.name==item.name)?45:35}]} onPress={()=>chooseCity(item)}>
+                        <TouchableOpacity style={[styles.city,{borderColor: (store.chosenCity?.name==item.name)?"#000000":"#d8d7d7", paddingHorizontal:(store.chosenCity?.name==item.name)?15:7, height:(store.chosenCity?.name==item.name)?45:35}]} onPress={()=>chooseCity(item,setSearchString)}>
                             <View style={{position:"absolute",top:0,right:0,paddingVertical:5,paddingHorizontal:5,height:'100%',width:'100%',display:"flex"}}>
                                 {(store.chosenCity?.name==item.name) &&
                                     <TouchableOpacity onPress={()=>unChooseCity(setSearchString)} style={{height:'100%',display:"flex",alignItems:"flex-end"}}>

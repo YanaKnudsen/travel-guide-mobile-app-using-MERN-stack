@@ -1,13 +1,17 @@
 import {CitiesModel} from "../@types/CitiesModel.ts";
 import store from "../services/mobx/AppDataStore.ts";
+import {animateToRegion} from "./mapAnimations.ts";
 
-export function chooseCity(city:CitiesModel){
+
+export function chooseCity(city:CitiesModel,mapRef=null,setSearchString:Function){
+        setSearchString("");
         if (city._id=="mylocation"){
-            console.log("here")
-            console.log(store.hasLocationPermission);
             if (store.hasLocationPermission){
                 store.setChosenCity(city);
                 store.setRadius(10000);
+                if(store.mapFlag){
+                    animateToRegion(city.location[0], city.location[1],0.0922,0.0421,mapRef);
+                }
                 return;
             }
             else{
@@ -17,8 +21,20 @@ export function chooseCity(city:CitiesModel){
         }
         store.setChosenCity(city);
         store.setRadius(10000);
+    if(store.mapFlag){
+        animateToRegion(city.location[0], city.location[1],0.0922,0.0421,mapRef);
+    }
 
 }
+
+type BottomSheetProps={
+    city:CitiesModel
+};
+export type BottomSheetRefProps={
+
+};
+
+
 
 export function unChooseCity(setSearchString:Function){
         store.setChosenCity(null);

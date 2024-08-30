@@ -2,15 +2,10 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
     SafeAreaView,
     StyleSheet,
-    Text,
-    Image,
-    FlatList,
-    TouchableOpacity,
-    View, ImageBackground, TextInput,
-    ActivityIndicator, Dimensions,
+    View, ImageBackground,
+    ActivityIndicator,
 } from 'react-native';
 import store from "../services/mobx/AppDataStore.ts";
-import FontAwesome6 from "react-native-vector-icons/FontAwesome6.js";
 import {observer} from "mobx-react";
 import  {
     BottomSheetModal,
@@ -22,12 +17,11 @@ import PlacesCarousel from "../features/Places/PlacesCarousel.tsx";
 import {CitiesModel} from "../@types/CitiesModel.ts";
 import {FetchPlaces} from "../services/api/fetchPlaces.ts";
 import {FetchCities} from "../services/api/fetchCities.ts";
-import {chooseCity,unChooseCity,chooseCategories,chooseRadius} from "../actions/filterPlaces.ts";
+import {chooseCategories} from "../actions/filterPlaces.ts";
 import FilterContent from "../features/Filter/Filter.tsx";
 import FilterButton from "../features/Filter/FilterButton.tsx";
 import SearchField from "../features/Search/Search.tsx";
 import CitiesCarousel from "../features/Cities/CitiesCarousel.tsx";
-const initradius:number=store.initradius;
 
 
 function PlacesList({route,navigation}): React.JSX.Element {
@@ -48,7 +42,7 @@ function PlacesList({route,navigation}): React.JSX.Element {
     const [cities,setCities]=useState(Array<CitiesModel>);
 
     useEffect(()=>{
-        FetchPlaces(searchString,store.chosenCity,initradius,store.chosenCategories,5,setLoading,setPlaces,places,false);
+        FetchPlaces(searchString,store.chosenCity,store.initradius,store.chosenCategories,5,setLoading,setPlaces,places,false);
         FetchCities(searchString,5,setLoading,setCities,cities,false);
 
     },[]);
