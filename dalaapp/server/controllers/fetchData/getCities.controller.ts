@@ -3,12 +3,11 @@ const cities = require("../../models/City");
 
 
 export async function getCitiesController(req:Request,res:Response):Promise<void>{
-    const {offset,searchString}=req.body;
-    const limit=5; //to-do:make limit a parameter
+    const {offset,searchString,limit}=req.body;
     var query:any={};
     // search parameters
     if(searchString.length>0 ) {
-        query.title={ $regex : new RegExp(searchString, "i") }
+        query.name={ $regex : new RegExp(searchString, "i") }
     }
     try {
             const data = await cities.find(query).skip(offset).limit(limit);

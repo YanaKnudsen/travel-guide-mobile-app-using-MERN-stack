@@ -19,7 +19,6 @@ export async function getPlacesController(req:Request,res:Response):Promise<void
             .filter(function(k){return activeCategories[k]})
             .map(String);
         const relevantCategoriesWONearest = relevantCategories.filter(category => category !== "nearest");
-        console.log(relevantCategoriesWONearest) ;
         if(relevantCategoriesWONearest.length>0){
             query.categories=  { $in : relevantCategoriesWONearest } ;
         }else{

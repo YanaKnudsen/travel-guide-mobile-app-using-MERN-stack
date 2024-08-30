@@ -1,53 +1,53 @@
 import React, {useEffect,useState} from 'react';
-import type {PropsWithChildren} from 'react';
 import {
     SafeAreaView,
-    ScrollView,
     ImageBackground,
     StyleSheet,
     Text,
     Image,
-    useColorScheme,
     ActivityIndicator,
-    View, Animated, TouchableOpacity, FlatList, Dimensions,
+    View, TouchableOpacity, FlatList, Dimensions,
 } from 'react-native';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import AxiosInstance from "../axios/AxiosInstance.tsx";
 import store from "../services/mobx/AppDataStore.ts";
-import {check, PERMISSIONS, RESULTS,request} from 'react-native-permissions';
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6.js";
-import PlacesCarousel from "../components/carousels/horizontal/PlacesCarousel.tsx";
 import { observer } from "mobx-react";
-import GetLocation from 'react-native-get-location';
-import Geolocation from 'react-native-geolocation-service';
-import {CategoriesModel} from "../@types/CategoriesModel.ts";
-import DisplayCategories from "../components/categories/DisplayCategories.tsx";
-const {height, width} = Dimensions.get('window')
+
+const { width} = Dimensions.get('window')
 const CARD_WIDTH=width*0.8;
 const offsetRight=width/2-CARD_WIDTH/2
+import {FetchPlaces} from "../services/api/fetchPlaces.ts";
+import {requestPermission} from "../helpers/LocationPermission.ts";
+import {getContiniousLocation} from "../helpers/ObtainLocation.ts";
 
 function Home({navigation}): React.JSX.Element {
 
     const [places,setPlaces]=useState([]);
     const [loading,setLoading]=useState(false);
+    const [isLocationObtained,setIsLocationObtained]=useState(false);
 
 
+    //request permission
     useEffect(() => {
         requestPermission();
-        store.setRadius(10000);
-        showPlaces();
     }, []);
 
+    //obtain location if permission is true otherwise show ten first places in the database
     useEffect(() => {
-        showPlaces();
-    }, [store.myLocation]);
+        store.hasLocationPermission?getContiniousLocation(setIsLocationObtained):FetchPlaces("",null,store.initradius,null,10,setLoading,setPlaces,places,false);
+    }, [store.hasLocationPermission]);
 
+    //when location is obtained show ten nearest places
     useEffect(() => {
-        showPlaces();
-    }, [store.chosenCity]);
+        FetchPlaces("",store.myLocation[0],store.initradius,null,10,setLoading,setPlaces,places,false);
+    }, [isLocationObtained]);
 
+    //update places when location is changed
+  /*  useEffect(() => {
+        //showPlaces();
+    }, [?]);
 
-
+or
     useEffect(() => {
         store.setCurrentLat(store.currentPosition?.coords.latitude);
         store.setCurrentLong(store.currentPosition?.coords.longitude);
@@ -55,85 +55,17 @@ function Home({navigation}): React.JSX.Element {
         console.log(store.currentLat);
         console.log(store.currentLong);
     }, [store.currentPosition]);
+    */
 
-
-    const getContiniousLocation = () => {
-        if (store.hasLocationPermission) {
-            Geolocation.getCurrentPosition(
-                (position) => {
-                    console.log(position);
-                    store.setCurrentPosition(position);
-                    store.setCurrentLat(position.coords.latitude);
-                    store.setCurrentLong(position.coords.longitude);
-                    store.setMyLocation([{
-                        _id:"mylocation",
-                        name:"My location",
-                        location:[position.coords.latitude,position.coords.longitude]
-                    }]);
-                    console.log("chosen city",store.chosenCity)
-                },
-                (error) => {
-                    // See error code charts below.
-                    console.log(error.code, error.message);
-                },
-                { enableHighAccuracy: true, timeout: 15000,distanceFilter:10000 }
-            );
-        }
-    };
-
-
-    const requestPermission=()=>{
-        request(PERMISSIONS.IOS.LOCATION_ALWAYS).then((result) => {
-            switch (result) {
-                case RESULTS.UNAVAILABLE:
-                    console.log(
-                        'This feature is not available (on this device / in this context)',
-                    );
-                    showPlaces();
-                    break;
-                case RESULTS.DENIED:
-                    console.log(
-                        'The permission has not been requested / is denied but requestable',
-                    );
-                    break;
-                case RESULTS.GRANTED:
-                    console.log('The permission is granted');
-                    store.setHasLocationPermission(true);
-                    console.log(store.hasLocationPermission);
-                    getContiniousLocation();
-                    break;
-                case RESULTS.BLOCKED:
-                    console.log('The permission is denied and not requestable anymore');
-                    break;
-            }
-        });
-    }
-
-    function showFilteredList(categoryList:Array<string>){
-       NavigateToPlacesList(categoryList);
-    }
-
-    function NavigateToPlacesList(categoryList){
+    //choose category and navigate to the places list
+    function NavigateToPlacesList(categoryList:Array<string>){
         store.setPlacesFlag(true);
         store.setHomeFlag(false);
         store.setMapFlag(false);
         navigation.navigate('Places',{categoryList: categoryList});
     }
 
-    async function showPlaces(){
-        setLoading(true);
-        let offsetPlace=0;
-        setPlaces([]);
-        AxiosInstance.post('/paginatePlaces',{offset:offsetPlace,searchString:"",radius:10000,chosenCity:store.myLocation[0],limit:10})
-            .then(res => {
-                setPlaces(res.data);
-                setLoading(false);
-            })
-            .catch(err => {
-                // Handle errors
-                console.error(err);
-            });
-    }
+    //navigate to place page
     function NavigateToPlacePage(marker){
         navigation.navigate('PlacePage',{placeObj: marker});
     };
@@ -148,19 +80,19 @@ function Home({navigation}): React.JSX.Element {
                 <View style={styles.categoriesContainer}>
                     <Text style={[styles.sectionTitle,{marginBottom:10}]}>Explore Dalarna</Text>
                     <View style={styles.categoriesRow}>
-                       <TouchableOpacity style={[styles.categorie,{backgroundColor: '#f0f1b3'}]} onPress={()=>showFilteredList(["restaurants","fika"])}>
+                       <TouchableOpacity style={[styles.categorie,{backgroundColor: '#f0f1b3'}]} onPress={()=>NavigateToPlacesList(["restaurants","fika"])}>
                            <FontAwesome5 name="utensils" size={30} />
                            <View style={styles.categorieText}>
                            <Text style={styles.upperCase}>Food</Text>
                            </View>
                        </TouchableOpacity>
-                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#bae2be'}]} onPress={()=>showFilteredList(["shops"])}>
+                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#bae2be'}]} onPress={()=>NavigateToPlacesList(["shops"])}>
                             <FontAwesome5 name="shopping-cart" size={30} />
                             <View style={styles.categorieText}>
                                 <Text style={styles.upperCase}>Shops</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.categorie,{backgroundColor: '#c5e5e3'}]} onPress={()=>showFilteredList(["attractions"])}>
+                        <TouchableOpacity style={[styles.categorie,{backgroundColor: '#c5e5e3'}]} onPress={()=>NavigateToPlacesList(["attractions"])}>
                             <FontAwesome5 name="eye" size={30} />
                             <View style={styles.categorieText}>
                             <Text style={styles.upperCase}>Attractions</Text>
@@ -169,19 +101,19 @@ function Home({navigation}): React.JSX.Element {
                     </View>
 
                     <View style={styles.categoriesRow}>
-                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#ffd3b6'}]} onPress={()=>showFilteredList(["toDo"])}>
+                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#ffd3b6'}]} onPress={()=>NavigateToPlacesList(["toDo"])}>
                             <FontAwesome6 name="masks-theater" size={30} />
                             <View style={styles.categorieText}>
                             <Text style={styles.upperCase}>To do</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#93e4c1'}]} onPress={()=>showFilteredList(["accommodation"])}>
+                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#93e4c1'}]} onPress={()=>NavigateToPlacesList(["accommodation"])}>
                             <FontAwesome5 name="bed" size={30} />
                             <View style={styles.categorieText}>
                                 <Text style={styles.upperCase}>Hotels</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.categorie,{backgroundColor: '#fdc57b'}]} onPress={()=>showFilteredList(["camping"])}>
+                        <TouchableOpacity style={[styles.categorie,{backgroundColor: '#fdc57b'}]} onPress={()=>NavigateToPlacesList(["camping"])}>
                             <FontAwesome5 name="caravan" size={30} />
                             <View style={styles.categorieText}>
                             <Text style={styles.upperCase}>Camping</Text>
@@ -189,7 +121,7 @@ function Home({navigation}): React.JSX.Element {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.categoriesRow}>
-                        <TouchableOpacity style={styles.bigButton} onPress={()=>showFilteredList([])}>
+                        <TouchableOpacity style={styles.bigButton} onPress={()=>NavigateToPlacesList([])}>
                             <Text style={[styles.upperCase,styles.bigFont]}>All places</Text>
                         </TouchableOpacity>
                     </View>
@@ -278,9 +210,10 @@ function Home({navigation}): React.JSX.Element {
                     snapToInterval={CARD_WIDTH + 10}
                     snapToAlignment="center"
                     renderItem={({item, index}) => {
-                        const image_uri = "http://localhost:4000/" + item.id + "/" + item.photos[0];
+                        const image_uri = "http://localhost:4000/uploads/" + item.id + "/" + item.photos[0];
                         return (
-                            <View style={styles.placeView} key={index}>
+                            <TouchableOpacity style={styles.placeView} key={index} onPress={()=>NavigateToPlacePage(item)}>
+
                                 <View style={{width: "100%",}}>
                                     <View style={styles.placeImage}>
                                         <Image
@@ -294,14 +227,11 @@ function Home({navigation}): React.JSX.Element {
                                             <Text style={styles.placeTitle}>{item.title}</Text>
                                         </View>
 
-                                        <View>
-                                            <Text style={{color: "#565656"}}>{item.dist/1000} km</Text>
-                                        </View>
                                     </View>
                                 </View>
 
 
-                            </View>
+                            </TouchableOpacity>
 
                         )
                     }}

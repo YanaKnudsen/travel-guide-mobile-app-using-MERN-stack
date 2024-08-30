@@ -53,7 +53,7 @@ function PlacePage({route,navigation}): React.JSX.Element {
                          const image_uri= "http://localhost:4000/uploads/"+placeObj.id+"/"+photo;
                          console.log(image_uri);
                      return(
-                         <View key={index} style={{height:"100%",width:width,backgroundColor:"#ff00ff",}}>
+                         <View key={index} style={{height:"100%",width:width,}}>
                             <Image style={{width:'100%',height:'100%',}} source={{uri:image_uri}}/>
                          </View>
                      )
