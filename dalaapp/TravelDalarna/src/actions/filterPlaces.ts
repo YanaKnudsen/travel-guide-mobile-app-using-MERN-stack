@@ -9,7 +9,7 @@ export function chooseCity(city:CitiesModel,mapRef=null,setSearchString:Function
             if (store.hasLocationPermission){
                 store.setChosenCity(city);
                 store.setRadius(10000);
-                if(store.mapFlag){
+                if(mapRef!=null){
                     animateToRegion(city.location[0], city.location[1],0.0922,0.0421,mapRef);
                 }
                 return;
@@ -21,7 +21,7 @@ export function chooseCity(city:CitiesModel,mapRef=null,setSearchString:Function
         }
         store.setChosenCity(city);
         store.setRadius(10000);
-    if(store.mapFlag){
+    if(mapRef!=null){
         animateToRegion(city.location[0], city.location[1],0.0922,0.0421,mapRef);
     }
 

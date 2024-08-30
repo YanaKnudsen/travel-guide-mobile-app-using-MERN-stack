@@ -26,15 +26,6 @@ import CitiesCarousel from "../features/Cities/CitiesCarousel.tsx";
 
 function PlacesList({route,navigation}): React.JSX.Element {
 
-    if (route.params)
-    {const {categoryList} = route.params;
-        useEffect(() => {
-           Object.keys(store.chosenCategories).forEach(function(key, value) {
-               return store.chosenCategories[key] = false;
-            })
-            chooseCategories(categoryList);
-        }, [categoryList]);}
-
 
     const [places,setPlaces]=useState([]);
     const [loading,setLoading]=useState(false);
@@ -46,6 +37,23 @@ function PlacesList({route,navigation}): React.JSX.Element {
         FetchCities(searchString,5,setLoading,setCities,cities,false);
 
     },[]);
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // The screen is focused
+            // Call any action
+            if(store.previousPage=="Map"){
+                store.setChosenCategories(store.initChosenCategories);
+            }
+            store.setChosenCity(null);
+            store.setRadius(store.initradius)
+            store.setPreviousPage(route.name);
+            //to-do make cite, rad and cat local variables so they can stay on the page
+        });
+
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, [navigation]);
 
     function onEndReachedPlaces(){
         FetchPlaces(searchString,store.chosenCity,store.radius,store.chosenCategories,5,setLoading,setPlaces,places,true);

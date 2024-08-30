@@ -19,18 +19,42 @@ const offsetRight=width/2-CARD_WIDTH/2
 import {FetchPlaces} from "../services/api/fetchPlaces.ts";
 import {requestPermission} from "../helpers/LocationPermission.ts";
 import {getContiniousLocation} from "../helpers/ObtainLocation.ts";
+import {chooseCategories} from "../actions/filterPlaces.ts";
 
-function Home({navigation}): React.JSX.Element {
 
+function Home({route,navigation}): React.JSX.Element {
     const [places,setPlaces]=useState([]);
     const [loading,setLoading]=useState(false);
     const [isLocationObtained,setIsLocationObtained]=useState(false);
 
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // The screen is focused
+            // Call any action
+            store.setChosenCategories(store.initChosenCategories);
+        });
+
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, [navigation]);
+
+
+    React.useEffect(() => {
+        store.setChosenCategories(store.initChosenCategories);
+        store.setChosenCity(null);
+        store.setRadius(store.initradius)
+        store.setPreviousPage(route.name);
+    }, [navigation]);
 
     //request permission
     useEffect(() => {
         requestPermission();
+
     }, []);
+
+    useEffect(() => {
+        console.log("switched to home");
+    }, [route.name]);
 
     //obtain location if permission is true otherwise show ten first places in the database
     useEffect(() => {
@@ -59,10 +83,13 @@ or
 
     //choose category and navigate to the places list
     function NavigateToPlacesList(categoryList:Array<string>){
-        store.setPlacesFlag(true);
-        store.setHomeFlag(false);
-        store.setMapFlag(false);
-        navigation.navigate('Places',{categoryList: categoryList});
+       // store.setPlacesFlag(true);
+       /// store.setHomeFlag(false);
+     //   store.setMapFlag(false);
+      //  navigation.navigate('Places',{categoryList: categoryList});
+        //to-do: make var here wich indicates thet nav coming throg cat choice
+        chooseCategories(categoryList);
+        navigation.navigate('Places');
     }
 
     //navigate to place page

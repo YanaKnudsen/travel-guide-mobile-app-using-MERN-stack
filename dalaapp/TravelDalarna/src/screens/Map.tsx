@@ -62,7 +62,7 @@ import BottomSheet from "../components/ui/BottomSheet.tsx";
 // This is required whether or not you are accessing the users location, as Google Maps iOS SDK contains the code required to access the users location.
 //from https://github.com/react-native-maps/react-native-maps/blob/master/docs/installation.md
 
-function Map({navigation}): React.JSX.Element {
+function Map({route,navigation}): React.JSX.Element {
     const animLatDelta=useSharedValue<number>(0.0922);//store.currentLat
     const animLongDelta=useSharedValue<number>(0.0421);
     const [places,setPlaces]=useState([]);
@@ -71,6 +71,20 @@ function Map({navigation}): React.JSX.Element {
     const [chosenMarker,setChosenMarker]=useState([]);
     const [searchString,setSearchString]=useState("");
     const mapRef = useRef();
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // The screen is focused
+            // Call any action
+            store.setChosenCategories(store.initChosenCategories);
+            store.setChosenCity(null);
+            store.setRadius(store.initradius)
+            store.setPreviousPage(route.name);
+        });
+
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, [navigation]);
 
     useEffect(()=>{
         store.setChosenCity(null);
