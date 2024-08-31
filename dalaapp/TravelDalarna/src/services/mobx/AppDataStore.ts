@@ -46,14 +46,15 @@ class AppDataStore{
     radius:number=25000000;
     initradius:number=25000000;
 
+
     previousPage:string="";
+    accessToken:string="";
 
-    permissionGranted:boolean=false;
     hasLocationPermission:boolean=false;
+    isSignUp:boolean=false;
 
-    placesFlag:boolean=false;
-    homeFlag:boolean=false;
-    mapFlag:boolean=false;
+    isLogined:boolean=false;
+
 
 
     setPlaces(items: Array<PlacesModel> ) {
@@ -94,7 +95,16 @@ class AppDataStore{
     setPreviousPage(val:string) {
         this.previousPage = val;
     }
+    setAccessToken(val:string) {
+        this.accessToken = val;
+    }
 
+    setIsLogined(val:boolean) {
+        this.isLogined = val;
+    }
+    setIsSignUp(val:boolean) {
+        this.isSignUp = val;
+    }
 
     async hydrateStore() {
         await hydrateStore(this);
