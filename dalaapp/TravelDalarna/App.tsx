@@ -40,7 +40,7 @@ function HomeNav({route,navigation}) {
             }}/>
             <Tab.Screen name="HomeScreen" component={Home} options={{
                 tabBarIcon:({focused})=>(
-                    <View style={{ display:'flex',justifyContent:'center',alignItems:'center',position:'relative'}}>
+                    <View style={{ display:'flex',justifyContent:'center',alignItems:'center'}}>
                             <FontAwesome6 name="house" size={20} color={focused?"#000000":"#a2a2a2"}/>
                         <Text>Home</Text>
                     </View>
@@ -54,6 +54,15 @@ function HomeNav({route,navigation}) {
                         <Text>places</Text>
                     </View>
                 ),
+            }}/>
+            <Tab.Screen name="Profile" component={Profile} options={{
+                tabBarIcon:({focused})=>(
+                    <View style={{ display:'flex',justifyContent:'center',alignItems:'center',}}>
+                        <FontAwesome5 name="user" solid size={20} color={focused?"#000000":"#a2a2a2"}/>
+                        <Text>profile</Text>
+                    </View>
+                ),
+
             }}/>
 
         </Tab.Navigator>

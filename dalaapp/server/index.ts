@@ -3,6 +3,7 @@
 // and defines middleware configurations.
 const express = require('express');
 import { fetchDataRoute } from "./routes/fetch.router";
+import {loginRoute} from "./routes/login.router";
 const cors=require('cors');
 const mongoose = require("mongoose");
 const app=express();
