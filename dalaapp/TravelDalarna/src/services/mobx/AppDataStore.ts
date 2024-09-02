@@ -5,13 +5,14 @@ import { makePersistable,hydrateStore  } from 'mobx-persist-store';
 import {CitiesModel} from "../../@types/CitiesModel.ts";
 import {LocationType} from "../../@types/LocationType.ts";
 import {MarkersModel} from "../../@types/MarkersModel.ts";
+import {UserType} from "../../@types/UserType.ts";
 
 class AppDataStore{
     constructor() {
         makeAutoObservable(this);
         makePersistable(this, {
             name: 'SampleStore',
-            properties: ["hasLocationPermission","currentLocation"],
+            properties: ["hasLocationPermission","currentLocation","isLogined",],
             storage: window.localStorage
         }).then(r => {});
     }
@@ -27,6 +28,7 @@ class AppDataStore{
         location:[0,0]
     }];
     currentPosition : LocationType| null=null ;
+    user : UserType| null=null ;
 
     initChosenCategories: CategoriesModel | null = {
             nearest:false,
@@ -74,6 +76,9 @@ class AppDataStore{
     }
     setCurrentPosition(item: LocationType ) {
         this.currentLocation = item;
+    }
+    setUser(item: UserType ) {
+        this.user = item;
     }
     setChosenCategories(item: CategoriesModel | null ) {
         this.chosenCategories = item;

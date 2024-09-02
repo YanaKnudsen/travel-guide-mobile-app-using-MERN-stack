@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Dimensions,
     ImageBackground,
@@ -18,7 +18,9 @@ import ProfileContent from "../features/Profile/ProfileContent.tsx";
 //t-do add on both login and signup so you can not see password when typing like eye
 //to-do:add islogdein to persistent values
 function Profile({route,navigation}): React.JSX.Element {
-
+    useEffect(() => {
+        store.setIsLogined(true);
+    }, []);
     return (
         <ImageBackground source={store.isLogined?(require("../../assets/backgrounds/dalaWallPaper.png")):(require("../../assets/backgrounds/forest.png"))} resizeMode="cover">
         <SafeAreaView style={[styles.profilePage,{backgroundColor:store.isLogined?"#ffffff97":"transparent"}]}>

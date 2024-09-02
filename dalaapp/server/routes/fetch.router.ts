@@ -5,6 +5,7 @@ import { getMarkersController  } from "../controllers/fetchData/getMarkers.contr
 import {loginController} from "../controllers/Login/logIn.controllers";
 import {signupController} from "../controllers/Login/signUp.controllers";
 import {profileController} from "../controllers/Login/profile.controllers";
+import {authenticateToken} from "../controllers/middleware/authenticateToken";
 
 export const fetchDataRoute = express.Router();
 
@@ -13,4 +14,4 @@ fetchDataRoute.post("/searchCity", getCitiesController);
 fetchDataRoute.post("/loadMarkers", getMarkersController);
 fetchDataRoute.post("/login", loginController);
 fetchDataRoute.post("/signup", signupController);
-fetchDataRoute.get("/profile", profileController);
+fetchDataRoute.get("/profile", authenticateToken,profileController);

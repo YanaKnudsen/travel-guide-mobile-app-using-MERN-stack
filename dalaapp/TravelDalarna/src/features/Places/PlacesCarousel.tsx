@@ -5,9 +5,10 @@ import React from "react";
 
 
 
-function PlacesCarousel({data,onEndReached,NavigateToPlacePage}) {
+function PlacesCarousel({data,onEndReached,NavigateToPlacePage,isHorizontal=false}) {
     return (
         <FlatList
+            horizontal={isHorizontal}
             style={styles.scrollCont}
             data={data}
             onEndReached={onEndReached}
