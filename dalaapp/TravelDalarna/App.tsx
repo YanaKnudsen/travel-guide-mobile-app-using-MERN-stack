@@ -18,6 +18,7 @@ import store from "./src/services/mobx/AppDataStore.ts";
 import { observer } from "mobx-react";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6.js";
 import Profile from "./src/screens/Profile.tsx";
+import AddNewPlace from "./src/features/AddNewPlace/AddNewPlace.tsx";
 
 
 const Tab = createBottomTabNavigator();
@@ -80,6 +81,7 @@ function App(): React.JSX.Element {
                   options={{ headerShown: false }}
               />
               <Stack.Screen name="PlacePage" component={PlacePage} options={{ headerShown: false }}/>
+              <Stack.Screen name="AddNewPlace" component={AddNewPlace} options={{ headerShown: false }}/>
           </Stack.Navigator>
       </NavigationContainer>
   );

@@ -319,7 +319,7 @@ function Map({route,navigation}): React.JSX.Element {
                 </View>
             </View>
 
-                <BottomSheet ref={bottomSheetModalRef}>
+                <BottomSheet ref={bottomSheetModalRef} firstSnapPoint={'25%'} secondSnapPoint={'85%'}>
                     <FilterContent/>
                 </BottomSheet>
 

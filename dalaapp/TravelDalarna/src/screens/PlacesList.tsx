@@ -117,7 +117,7 @@ function PlacesList({route,navigation}): React.JSX.Element {
                         </View>):
                         (<PlacesCarousel data={places} onEndReached={onEndReachedPlaces} NavigateToPlacePage={NavigateToPlacePage}/>)}
 
-                    <BottomSheet ref={bottomSheetModalRef}>
+                    <BottomSheet ref={bottomSheetModalRef} firstSnapPoint={'25%'} secondSnapPoint={'85%'}>
                        <FilterContent/>
                     </BottomSheet>
 

@@ -13,19 +13,25 @@ import store from "../services/mobx/AppDataStore.ts";
 import SignUp from "../features/Login/SignUp.tsx";
 import { observer } from "mobx-react";
 import ProfileContent from "../features/Profile/ProfileContent.tsx";
+import AddNewPlace from "../features/AddNewPlace/AddNewPlace.tsx";
 
 //to-do: forgot password feature
 //t-do add on both login and signup so you can not see password when typing like eye
 //to-do:add islogdein to persistent values
 function Profile({route,navigation}): React.JSX.Element {
     useEffect(() => {
-        store.setIsLogined(true);
+      //  store.setIsLogined(true);
     }, []);
+
+
+    function addNewPlace(){
+        navigation.navigate('AddNewPlace')
+    }
     return (
         <ImageBackground source={store.isLogined?(require("../../assets/backgrounds/dalaWallPaper.png")):(require("../../assets/backgrounds/forest.png"))} resizeMode="cover">
         <SafeAreaView style={[styles.profilePage,{backgroundColor:store.isLogined?"#ffffff97":"transparent"}]}>
             {store.isLogined?
-                (<ProfileContent/>)
+                (<ProfileContent addNewPlace={addNewPlace}/>)
                 :
                 (store.isSignUp?(<SignUp/>):(<Login/>))
             }

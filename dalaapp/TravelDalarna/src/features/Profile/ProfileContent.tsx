@@ -11,7 +11,7 @@ import { observer } from "mobx-react";
 import {FetchPlaces} from "../../services/api/fetchPlaces.ts";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5.js";
 //to-do fix safe area view
-function ProfileContent(): React.JSX.Element {
+function ProfileContent({addNewPlace}): React.JSX.Element {
     const [myPlaces,setMyPlaces]=useState([]);
     const [loading,setLoading]=useState([]);
 
@@ -29,6 +29,12 @@ function ProfileContent(): React.JSX.Element {
 
     }
 
+    function deleteAccount(){
+
+    }
+
+
+
     return (
         <View style={styles.ProfileContentView}>
             <View style={styles.welcome}>
@@ -37,7 +43,7 @@ function ProfileContent(): React.JSX.Element {
             <View>
                 <View style={styles.myPlaces}>
                     <Text style={styles.myPlacesTextMain}>My Places</Text>
-                    <TouchableOpacity style={styles.addPlacesButton}>
+                    <TouchableOpacity style={styles.addPlacesButton} onPress={addNewPlace}>
                         <Text>Add new place</Text>
                         <FontAwesome5 name="plus" size={20} />
                     </TouchableOpacity>
@@ -46,7 +52,8 @@ function ProfileContent(): React.JSX.Element {
                 <PlacesCarouselNew data={myPlaces} onEndReached={onEndReached} NavigateToPlacePage={NavigateToPlacePage} isHorizontal={true}/>
                 </View>
                 <View >
-                    <TouchableOpacity style={{backgroundColor:"red",marginBottom:20,}}>
+                    <TouchableOpacity style={styles.deleteAccountButton} onPress={deleteAccount}>
+                        <FontAwesome5 name="user-minus" size={20} />
                         <Text>Delete account</Text>
                     </TouchableOpacity>
                 </View>
@@ -97,7 +104,21 @@ const styles = StyleSheet.create({
         borderWidth:1,
         shadowOpacity:0.15,shadowRadius:7.5,elevation:5,
         borderColor:"#d3d6db"
-    }
+    },
+    deleteAccountButton:{
+        width:"40%",
+        backgroundColor:"#EA5D5C",
+        marginBottom:20,
+        display:"flex",
+        flexDirection:"row",
+        paddingVertical:7,
+        paddingHorizontal:10,
+        gap:5,
+        alignItems:"center",
+        justifyContent:"space-around",
+        borderRadius:10,
+        shadowOpacity:0.15,shadowRadius:7.5,elevation:5,
+    },
 });
 
 export default observer(ProfileContent);

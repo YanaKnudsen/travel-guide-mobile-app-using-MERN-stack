@@ -50,6 +50,7 @@
 		2D0BE8952C4FB85F00EEEEB1 /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome6_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome6_Brands.ttf"; sourceTree = "<group>"; };
 		2D0BE8962C4FB86500EEEEB1 /* FontAwesome6_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome6_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome6_Regular.ttf"; sourceTree = "<group>"; };
 		2D0BE8972C4FB86900EEEEB1 /* FontAwesome6_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome6_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome6_Solid.ttf"; sourceTree = "<group>"; };
+		2D70410E2C861AC400261F25 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		2D7213FA2C4C102800B606CF /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		2D7213FB2C4C104100B606CF /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-TravelDalarna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDalarna.debug.xcconfig"; path = "Target Support Files/Pods-TravelDalarna/Pods-TravelDalarna.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +129,7 @@
 		2D7213F92C4C0F8800B606CF /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				2D70410E2C861AC400261F25 /* Fontisto.ttf */,
 				2D0BE8972C4FB86900EEEEB1 /* FontAwesome6_Solid.ttf */,
 				2D0BE8962C4FB86500EEEEB1 /* FontAwesome6_Regular.ttf */,
 				2D0BE8952C4FB85F00EEEEB1 /* FontAwesome6_Brands.ttf */,

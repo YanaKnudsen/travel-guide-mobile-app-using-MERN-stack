@@ -8,7 +8,9 @@ import {StyleSheet,Text} from "react-native";
 
 
 type BottomSheetProps={
-    children?:React.ReactNode
+    children?:React.ReactNode,
+    firstSnapPoint:number,
+    secondSnapPoint:number,
 };
 export type BottomSheetRefProps={
    // <BottomSheetRefProps,BottomSheetProps>
@@ -20,7 +22,7 @@ export type BottomSheetRefProps={
 const BottomSheet=forwardRef<BottomSheetRefProps,BottomSheetProps>(function BottomSheet(props,ref){
     //const {label,...otherProps}=props;
     // variables
-    const snapPoints = useMemo(() => ['25%', '82%'], []);
+    const snapPoints = useMemo(() => [props.firstSnapPoint, props.secondSnapPoint], []);
 
     const handleSheetChanges = useCallback((index: number) => {
         console.log('handleSheetChanges', index);
