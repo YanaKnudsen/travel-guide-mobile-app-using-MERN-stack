@@ -36,14 +36,14 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>YOUR TEXT</string>
+	<string>We need your location to provide personalized travel recommendations and real-time guides based on your current surroundings.</string>
 	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 	<dict>
 		<key>YOUR-PURPOSE-KEY</key>
-		<string>YOUR TEXT</string>
+		<string>We need your location to provide personalized travel recommendations and real-time guides based on your current surroundings.</string>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow this app to use your location.</string>
+	<string>We need your location to provide personalized travel recommendations and real-time guides based on your current surroundings.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome_Regular.ttf</string>
