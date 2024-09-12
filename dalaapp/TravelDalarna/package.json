@@ -8,7 +8,9 @@
     "ios-device": "react-native run-ios --device \"Yana’s iPhone\"",
     "lint": "eslint .",
     "start": "react-native start --reset-cache",
-    "test": "jest"
+    "test": "jest",
+    "release-android": "react-native build-android --mode=release",
+    "release-ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios' --assets-dest='ios'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
