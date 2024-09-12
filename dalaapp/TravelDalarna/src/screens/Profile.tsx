@@ -20,7 +20,7 @@ import AddNewPlace from "../features/AddNewPlace/AddNewPlace.tsx";
 //to-do:add islogdein to persistent values
 function Profile({route,navigation}): React.JSX.Element {
     useEffect(() => {
-      //  store.setIsLogined(true);
+      store.setIsLogined(true);
     }, []);
 
 

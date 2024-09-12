@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
 const {Schema}=mongoose;
 
+
 const placeSchema=new Schema({
     title:String,
     description:String,
@@ -14,6 +15,7 @@ const placeSchema=new Schema({
     categories:[String],
     id:String,
     dist:Number,
+    owner: {type: mongoose.Schema.Types.ObjectId,ref:'users'},
 
 },  { collection : 'places' });
 
