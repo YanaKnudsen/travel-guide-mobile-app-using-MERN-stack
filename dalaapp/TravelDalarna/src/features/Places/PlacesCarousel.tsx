@@ -24,7 +24,7 @@ function PlacesCarousel({data,onEndReached,NavigateToPlacePage,isHorizontal=fals
             }}
             // ListFooterComponent={ListEndLoader} // Loader when loading next page.
             renderItem={({ item,index }) => {
-                const image_uri= "http://localhost:4000/uploads/"+item.id+"/"+item.photos[0];
+                const image_uri= "https://dala.app.qnudsen.com/uploads/"+item.id+"/"+item.photos[0];
                 return (
                     <TouchableOpacity key={item.id} style={styles.placeCont} onPress={()=>NavigateToPlacePage(item)}>
                         <View style={styles.placeImage}>

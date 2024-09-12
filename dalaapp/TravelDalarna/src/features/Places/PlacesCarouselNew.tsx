@@ -20,7 +20,7 @@ function PlacesCarouselNew({data,onEndReached,NavigateToPlacePage,isHorizontal=f
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             renderItem={({ item,index }) => {
-                const image_uri= "http://localhost:4000/uploads/"+item.id+"/"+item.photos[0];
+                const image_uri= "https://dala.app.qnudsen.com/uploads/"+item.id+"/"+item.photos[0];
                 return (
                     <TouchableOpacity key={item.id} style={styles.placeCont} onPress={()=>NavigateToPlacePage(item)}>
                         <View style={styles.placeImageCont}>

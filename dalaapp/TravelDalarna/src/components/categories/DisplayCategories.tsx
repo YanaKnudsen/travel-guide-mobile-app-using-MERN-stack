@@ -10,43 +10,43 @@ function DisplayCategories({category,size=30,}) {
                     <View>
                         {    //change to map for ech category icon name
                             category==="fika" && (
-                                <View style={[styles.categoryCont,{backgroundColor: '#a3a7e4',width:size,height:size}]}>
+                                <View style={[styles.categoryCont,{backgroundColor: '#E6D3F1',width:size,height:size}]}>
                                     <FontAwesome5 name="coffee" size={17} />
                                 </View>
                             ) }
                         {    //change to map for ech category icon name
                             category==="restaurants" && (
-                                <View style={[styles.categoryCont,{backgroundColor: '#f0f1b3',width:size,height:size}]}>
+                                <View style={[styles.categoryCont,{backgroundColor: '#FFF2B5',width:size,height:size}]}>
                                     <FontAwesome5 name="utensils" size={17} />
                                 </View>
                             ) }
                         {    //change to map for ech category icon name
                             category==="shops" && (
-                                <View style={[styles.categoryCont,{backgroundColor: '#bae2be',width:size,height:size}]}>
+                                <View style={[styles.categoryCont,{backgroundColor: '#B5F5D2',width:size,height:size}]}>
                                     <FontAwesome5 name="shopping-cart" size={17} />
                                 </View>
                             ) }
                         {    //change to map for ech category icon name
                             category==="attractions" && (
-                                <View style={[styles.categoryCont,{backgroundColor: '#c5e5e3',width:size,height:size}]}>
+                                <View style={[styles.categoryCont,{backgroundColor: '#A7D8F0',width:size,height:size}]}>
                                     <FontAwesome5 name="eye" size={17} />
                                 </View>
                             ) }
                         {    //change to map for ech category icon name
                             category==="toDo" && (
-                                <View style={[styles.categoryCont,{backgroundColor: "#ffd3b6",width:size,height:size}]}>
+                                <View style={[styles.categoryCont,{backgroundColor: "#F9C2D1",width:size,height:size}]}>
                                     <FontAwesome6 name="masks-theater" size={17} />
                                 </View>
                             ) }
                         {    //change to map for ech category icon name
                             category==="accommodation" && (
-                                <View style={[styles.categoryCont,{backgroundColor: "#93e4c1",width:size,height:size}]}>
+                                <View style={[styles.categoryCont,{backgroundColor: "#CBBEEB",width:size,height:size}]}>
                                     <FontAwesome5 name="bed" size={17} />
                                 </View>
                             ) }
                         {    //change to map for ech category icon name
                             category==="camping" && (
-                                <View style={[styles.categoryCont,{backgroundColor: "#fdc57b",width:size,height:size}]}>
+                                <View style={[styles.categoryCont,{backgroundColor: "#FFD5B5",width:size,height:size}]}>
                                     <FontAwesome5 name="caravan" size={17} />
                                 </View>
                             ) }

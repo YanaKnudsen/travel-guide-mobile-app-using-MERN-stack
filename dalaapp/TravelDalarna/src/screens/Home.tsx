@@ -107,19 +107,19 @@ or
                 <View style={styles.categoriesContainer}>
                     <Text style={[styles.sectionTitle,{marginBottom:10}]}>Explore Dalarna</Text>
                     <View style={styles.categoriesRow}>
-                       <TouchableOpacity style={[styles.categorie,{backgroundColor: '#f0f1b3'}]} onPress={()=>NavigateToPlacesList(["restaurants","fika"])}>
+                       <TouchableOpacity style={[styles.categorie,{backgroundColor: '#FFF2B5'}]} onPress={()=>NavigateToPlacesList(["restaurants","fika"])}>
                            <FontAwesome5 name="utensils" size={30} />
                            <View style={styles.categorieText}>
                            <Text style={styles.upperCase}>Food</Text>
                            </View>
                        </TouchableOpacity>
-                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#bae2be'}]} onPress={()=>NavigateToPlacesList(["shops"])}>
+                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: "#B5F5D2"}]} onPress={()=>NavigateToPlacesList(["shops"])}>
                             <FontAwesome5 name="shopping-cart" size={30} />
                             <View style={styles.categorieText}>
                                 <Text style={styles.upperCase}>Shops</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.categorie,{backgroundColor: '#c5e5e3'}]} onPress={()=>NavigateToPlacesList(["attractions"])}>
+                        <TouchableOpacity style={[styles.categorie,{backgroundColor: '#A7D8F0'}]} onPress={()=>NavigateToPlacesList(["attractions"])}>
                             <FontAwesome5 name="eye" size={30} />
                             <View style={styles.categorieText}>
                             <Text style={styles.upperCase}>Attractions</Text>
@@ -128,19 +128,19 @@ or
                     </View>
 
                     <View style={styles.categoriesRow}>
-                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#ffd3b6'}]} onPress={()=>NavigateToPlacesList(["toDo"])}>
+                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#F9C2D1'}]} onPress={()=>NavigateToPlacesList(["toDo"])}>
                             <FontAwesome6 name="masks-theater" size={30} />
                             <View style={styles.categorieText}>
                             <Text style={styles.upperCase}>To do</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#93e4c1'}]} onPress={()=>NavigateToPlacesList(["accommodation"])}>
+                        <TouchableOpacity  style={[styles.categorie,{backgroundColor: '#CBBEEB'}]} onPress={()=>NavigateToPlacesList(["accommodation"])}>
                             <FontAwesome5 name="bed" size={30} />
                             <View style={styles.categorieText}>
                                 <Text style={styles.upperCase}>Hotels</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.categorie,{backgroundColor: '#fdc57b'}]} onPress={()=>NavigateToPlacesList(["camping"])}>
+                        <TouchableOpacity style={[styles.categorie,{backgroundColor: '#FFD5B5'}]} onPress={()=>NavigateToPlacesList(["camping"])}>
                             <FontAwesome5 name="caravan" size={30} />
                             <View style={styles.categorieText}>
                             <Text style={styles.upperCase}>Camping</Text>
@@ -180,7 +180,7 @@ or
                     snapToInterval={CARD_WIDTH + 10}
                     snapToAlignment="center"
                     renderItem={({item, index}) => {
-                        const image_uri = "http://localhost:4000/uploads/" + item.id + "/" + item.photos[0];
+                        const image_uri = "https://dala.app.qnudsen.com/uploads/" + item.id + "/" + item.photos[0];
                         return (
                             <TouchableOpacity style={styles.placeView} key={index} onPress={()=>NavigateToPlacePage(item)}>
                                 <View style={{width: "100%",}}>
@@ -237,7 +237,7 @@ or
                     snapToInterval={CARD_WIDTH + 10}
                     snapToAlignment="center"
                     renderItem={({item, index}) => {
-                        const image_uri = "http://localhost:4000/uploads/" + item.id + "/" + item.photos[0];
+                        const image_uri = "https://dala.app.qnudsen.com/uploads/" + item.id + "/" + item.photos[0];
                         return (
                             <TouchableOpacity style={styles.placeView} key={index} onPress={()=>NavigateToPlacePage(item)}>
 

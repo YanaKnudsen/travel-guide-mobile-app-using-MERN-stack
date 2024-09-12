@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL='http://localhost:4000';
+const baseURL='https://dala.app.qnudsen.com';//'http://localhost:4000';
 const AxiosInstance=axios.create({
     baseURL:baseURL,
     withCredentials:true,

@@ -197,7 +197,7 @@ function Map({route,navigation}): React.JSX.Element {
                           (chosenMarker[0]==marker.location[0] && chosenMarker[1]==marker.location[1])?'#ff0e00':(marker.title=="My location")?'#007FFF':'#EA5D5C'
                       }
                         //  description={marker.description}
-                          onPress={(e)=>onMarkerPress(e)}
+                        //  onPress={(e)=>onMarkerPress(e)}
                       />
 
 
@@ -277,7 +277,7 @@ function Map({route,navigation}): React.JSX.Element {
                     snapToInterval={CARD_WIDTH+10}
                     snapToAlignment="center"
                     renderItem={({ item,index }) => {
-                        const image_uri= "http://localhost:4000/uploads/"+item.id+"/"+item.photos[0];
+                        const image_uri= "https://dala.app.qnudsen.com/uploads/"+item.id+"/"+item.photos[0];
                         return(
                             <TouchableOpacity style={styles.placeView} key={index} onPress={()=> {
                                 animateToRegion(item.location[0], item.location[1],0.009,0.004,mapRef);
@@ -301,11 +301,11 @@ function Map({route,navigation}): React.JSX.Element {
 
                                 <View style={styles.ButtonsCont}>
                                     <TouchableOpacity
-                                        style={[styles.Button,{backgroundColor: "#61b390"}]}
+                                        style={[styles.Button,{backgroundColor: "#B2EAB7"}]}
                                         onPress={()=>NavigateToPlacePage(item)}>
                                         <Text>Learn More</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={[styles.Button,{backgroundColor: "#64c4ed"}]} onPress={()=>showDirections(marker.location[0],marker.location[1])}>
+                                    <TouchableOpacity style={[styles.Button,{backgroundColor: "#A7D8F0"}]} onPress={()=>showDirections(marker.location[0],marker.location[1])}>
                                         <Text>Directions</Text>
                                         <FontAwesome6 name="diamond-turn-right" size={15} />
                                     </TouchableOpacity>
