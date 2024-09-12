@@ -12,7 +12,7 @@ class AppDataStore{
         makeAutoObservable(this);
         makePersistable(this, {
             name: 'SampleStore',
-            properties: ["hasLocationPermission","currentLocation","isLogined",],
+            properties: ["hasLocationPermission","currentLocation","isLogined","myLocation",],
             storage: window.localStorage
         }).then(r => {});
     }

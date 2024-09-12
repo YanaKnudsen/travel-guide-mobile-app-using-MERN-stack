@@ -56,7 +56,7 @@ function HomeNav({route,navigation}) {
                     </View>
                 ),
             }}/>
-            <Tab.Screen name="Profile" component={Profile} options={{
+            {/* <Tab.Screen name="Profile" component={Profile} options={{
                 tabBarIcon:({focused})=>(
                     <View style={{ display:'flex',justifyContent:'center',alignItems:'center',}}>
                         <FontAwesome5 name="user" solid size={20} color={focused?"#000000":"#a2a2a2"}/>
@@ -64,7 +64,7 @@ function HomeNav({route,navigation}) {
                     </View>
                 ),
 
-            }}/>
+            }}/>*/}
 
         </Tab.Navigator>
     );

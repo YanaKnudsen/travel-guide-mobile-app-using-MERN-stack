@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "ios-device": "react-native run-ios --device \"Yana’s iPhone\"",
     "lint": "eslint .",
     "start": "react-native start --reset-cache",
     "test": "jest"

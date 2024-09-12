@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState,Component} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
     SafeAreaView,
@@ -55,6 +55,8 @@ import {FetchCities} from "../services/api/fetchCities.ts";
 import {chooseCategories} from "../actions/filterPlaces.ts";
 import FilterContent from "../features/Filter/Filter.tsx";
 import BottomSheet from "../components/ui/BottomSheet.tsx";
+import {showDirections} from "../helpers/showDirections.ts";
+
 
 //The app's Info.plist file must contain a NSLocationWhenInUseUsageDescription
 // with a user-facing purpose string explaining clearly and completely why your app needs the location,
@@ -149,27 +151,7 @@ function Map({route,navigation}): React.JSX.Element {
         navigation.navigate('PlacePage',{placeObj: marker});
     }
 
-    function showDirections(placeLat,placeLong){
-        const startPoint = {
-            latitude: 60.150332,
-            longitude: 15.185837,
-        }
-        console.log(placeLat,placeLong);
-        const endPoint = {
-            longitude: 61.19335058928549 ,
-            latitude: 14.53177737986383,
-        }
-        const transportPlan = 'd';
-        //showLocation({
-         //   latitude: 38.8976763,
-        //   longitude: -77.0387185,
-         //   title: 'Your destination',
-       // });
-      //  try on the real phone
-        OpenMapDirections(startPoint, endPoint, transportPlan).then(res => {
-            console.log(res)
-        });
-    }
+
     // ref
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -178,6 +160,15 @@ function Map({route,navigation}): React.JSX.Element {
         bottomSheetModalRef.current?.present();
     }, []);
 
+    function choosecurrentcity(item){
+        if(store.chosenCity?.name==item.name){
+            unChooseCity(setSearchString)
+        }
+        else{
+            chooseCity(item,mapRef,setSearchString);
+        }
+    }
+
 
 
     return (
@@ -185,7 +176,9 @@ function Map({route,navigation}): React.JSX.Element {
             <BottomSheetModalProvider>
             <View style={{position:"relative",height:'100%',width:'100%',}}>
 
-                  <MapView ref={mapRef} initialRegion={INITIAL_REGION} style={{ flex: 1 }} clusterColor={'#EA5D5C'}>
+                  <MapView ref={mapRef} initialRegion={INITIAL_REGION}
+                           showsUserLocation={true}
+                           style={{ flex: 1 }} clusterColor={'#EA5D5C'}>
 
                   {store.markers.map((marker, index) => {
                       return(
@@ -235,17 +228,10 @@ function Map({route,navigation}): React.JSX.Element {
                         return(
                             <TouchableOpacity style={[styles.city,{borderColor: (store.chosenCity?.name==item.name)?"#000000":"#d8d7d7", paddingHorizontal:(store.chosenCity?.name==item.name)?15:7, height:(store.chosenCity?.name==item.name)?45:35}]}
                                               onPress={()=> {
-                                                  chooseCity(item,mapRef,setSearchString);
+                                                  choosecurrentcity(item);
                                               }}
                             >
                                 <View style={{position:"absolute",top:0,right:0,paddingVertical:5,paddingHorizontal:5,height:'100%',width:'100%',display:"flex"}}>
-                                    {(store.chosenCity?.name==item.name) &&
-                                        <TouchableOpacity onPress={()=> {
-                                            unChooseCity(setSearchString);
-                                        }}
-                                                          style={{height:'100%',display:"flex",alignItems:"flex-end"}}>
-                                            <FontAwesome6 name="xmark" size={10}/>
-                                        </TouchableOpacity>}
                                 </View>
                                 <Text>{item.name}</Text>
                             </TouchableOpacity>
@@ -305,7 +291,7 @@ function Map({route,navigation}): React.JSX.Element {
                                         onPress={()=>NavigateToPlacePage(item)}>
                                         <Text>Learn More</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={[styles.Button,{backgroundColor: "#A7D8F0"}]} onPress={()=>showDirections(marker.location[0],marker.location[1])}>
+                                    <TouchableOpacity style={[styles.Button,{backgroundColor: "#A7D8F0"}]} onPress={()=>showDirections(item.location[0],item.location[1])}>
                                         <Text>Directions</Text>
                                         <FontAwesome6 name="diamond-turn-right" size={15} />
                                     </TouchableOpacity>

@@ -66,20 +66,13 @@ function Home({route,navigation}): React.JSX.Element {
         FetchPlaces("",store.myLocation[0],store.initradius,null,10,setLoading,setPlaces,places,false);
     }, [isLocationObtained]);
 
-    //update places when location is changed
-  /*  useEffect(() => {
-        //showPlaces();
-    }, [?]);
 
-or
-    useEffect(() => {
-        store.setCurrentLat(store.currentPosition?.coords.latitude);
-        store.setCurrentLong(store.currentPosition?.coords.longitude);
-        console.log("position changed to ");
-        console.log(store.currentLat);
-        console.log(store.currentLong);
-    }, [store.currentPosition]);
-    */
+    //update places when location is changed
+  useEffect(() => {
+      FetchPlaces("",store.myLocation[0],store.initradius,null,10,setLoading,setPlaces,places,false);
+    }, [store.myLocation]);
+
+
 
     //choose category and navigate to the places list
     function NavigateToPlacesList(categoryList:Array<string>){

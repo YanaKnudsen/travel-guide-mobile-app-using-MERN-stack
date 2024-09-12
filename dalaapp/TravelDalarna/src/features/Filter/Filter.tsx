@@ -4,6 +4,7 @@ import ThinLine from "../../components/decorations/ThinLine.tsx";
 import CheckboxCategory from "../../components/filter/CheckboxCategory.tsx";
 import {chooseCategories, chooseRadius} from "../../actions/filterPlaces.ts";
 import Checkbox from "../../components/filter/Checkbox.tsx";
+import store from "../../services/mobx/AppDataStore.ts";
 
 
 function FilterContent() {
@@ -26,15 +27,15 @@ function FilterContent() {
                 <CheckboxCategory name={"Camping"} category={"camping"} onClick={()=>chooseCategories(["camping"])}/>
             </View>
         </View>
-        <View style={{display:"flex",flexDirection:"column",gap:10,}}>
+        {store.chosenCity!=null &&<View style={{display: "flex", flexDirection: "column", gap: 10,}}>
             <Text style={styles.title}>Distance</Text>
-            <View style={{flexDirection: 'row', flexWrap: 'wrap',gap:10,}}>
-                <Checkbox name={"10 km"} onClick={()=>chooseRadius(10000)}/>
-                <Checkbox name={"20 km"} onClick={()=>chooseRadius(20000)}/>
-                <Checkbox name={"50 km"} onClick={()=>chooseRadius(50000)}/>
-                <Checkbox name={"100 km"} onClick={()=>chooseRadius(100000)}/>
+            <View style={{flexDirection: 'row', flexWrap: 'wrap', gap: 10,}}>
+                <Checkbox name={"10 km"} onClick={() => chooseRadius(10000)}/>
+                <Checkbox name={"20 km"} onClick={() => chooseRadius(20000)}/>
+                <Checkbox name={"50 km"} onClick={() => chooseRadius(50000)}/>
+                <Checkbox name={"100 km"} onClick={() => chooseRadius(100000)}/>
             </View>
-        </View>
+        </View>}
 
 
     </View>

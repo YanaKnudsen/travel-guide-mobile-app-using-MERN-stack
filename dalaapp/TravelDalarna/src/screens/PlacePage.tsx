@@ -12,6 +12,7 @@ import {
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import DisplayCategories from "../components/categories/DisplayCategories.tsx";
+import {showDirections} from "../helpers/showDirections.ts";
 const {height, width} = Dimensions.get('window')
 const CARD_WIDTH=width;
 
@@ -50,7 +51,7 @@ function PlacePage({route,navigation}): React.JSX.Element {
                        snapToInterval={CARD_WIDTH}
                    >
                      {placeObj.photos.map((photo, index) => {
-                         const image_uri= "http://localhost:4000/uploads/"+placeObj.id+"/"+photo;
+                         const image_uri= "https://dala.app.qnudsen.com/uploads/"+placeObj.id+"/"+photo;
                          console.log(image_uri);
                      return(
                          <View key={index} style={{height:"100%",width:width,}}>
@@ -87,12 +88,10 @@ function PlacePage({route,navigation}): React.JSX.Element {
                        </TouchableOpacity>}
                        <View style={styles.socials}>
                            {placeObj.facebook.length>0 && <TouchableOpacity onPress={()=>callWebsite(placeObj.facebook)}>
-                                <Image style={{width: 30, height: 30,}}
-                                       source={require("../../assets/icons/facebook.png")}/>
+                               <FontAwesome5  name="facebook"  brands size={35} />
                            </TouchableOpacity>}
                            {placeObj.instagram.length>0 &&<TouchableOpacity onPress={()=>callWebsite(placeObj.instagram)}>
-                              <Image style={{width: 35, height: 35,}}
-                                       source={require("../../assets/icons/instagram.png")}/>
+                               <FontAwesome5  name="instagram"  size={35} />
                            </TouchableOpacity>}
                            <TouchableOpacity></TouchableOpacity>
                        </View>
@@ -100,7 +99,7 @@ function PlacePage({route,navigation}): React.JSX.Element {
                    </View>
                </View>
                <View style={styles.buttonCont}>
-               <TouchableOpacity style={styles.Button}>
+               <TouchableOpacity style={styles.Button} onPress={()=>showDirections(placeObj.location[0],placeObj.location[1])}>
                    <Text style={styles.buttonText}>Directions</Text>
                    <FontAwesome6 name="diamond-turn-right" size={20} />
                </TouchableOpacity>
