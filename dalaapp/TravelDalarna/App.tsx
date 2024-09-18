@@ -19,6 +19,7 @@ import { observer } from "mobx-react";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6.js";
 import Profile from "./src/screens/Profile.tsx";
 import AddNewPlace from "./src/features/AddNewPlace/AddNewPlace.tsx";
+import Hiking from "./src/screens/Hiking.tsx";
 
 
 const Tab = createBottomTabNavigator();
@@ -26,6 +27,7 @@ const Stack = createStackNavigator();
 
 
 function HomeNav({route,navigation}) {
+
 
     return (
         <Tab.Navigator  initialRouteName="HomeScreen" screenOptions={{headerShown: false ,tabBarShowLabel: false,
@@ -65,6 +67,15 @@ function HomeNav({route,navigation}) {
                 ),
 
             }}/>*/}
+             <Tab.Screen name="Nature" component={Hiking} options={{
+                tabBarIcon:({focused})=>(
+                    <View style={{ display:'flex',justifyContent:'center',alignItems:'center',}}>
+                        <FontAwesome6 name="person-hiking" solid size={20} color={focused?"#000000":"#a2a2a2"}/>
+                        <Text>outdoor</Text>
+                    </View>
+                ),
+
+            }}/>
 
         </Tab.Navigator>
     );

@@ -6,7 +6,7 @@ import {
     Text,
     Image,
     ActivityIndicator,
-    View, TouchableOpacity, FlatList, Dimensions,
+    View, TouchableOpacity, FlatList, Dimensions,Alert, Modal, Pressable,
 } from 'react-native';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import store from "../services/mobx/AppDataStore.ts";
@@ -20,12 +20,14 @@ import {FetchPlaces} from "../services/api/fetchPlaces.ts";
 import {requestPermission} from "../helpers/LocationPermission.ts";
 import {getContiniousLocation} from "../helpers/ObtainLocation.ts";
 import {chooseCategories} from "../actions/filterPlaces.ts";
+import SplashScreen from 'react-native-splash-screen';
 
 
 function Home({route,navigation}): React.JSX.Element {
     const [places,setPlaces]=useState([]);
     const [loading,setLoading]=useState(false);
     const [isLocationObtained,setIsLocationObtained]=useState(false);
+    const [modalVisible,setModalVisible]=useState(false);
 
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
@@ -48,9 +50,17 @@ function Home({route,navigation}): React.JSX.Element {
 
     //request permission
     useEffect(() => {
+        SplashScreen.hide();
         requestPermission();
+        console.log("modalshown",store.modalIsShown);
+
 
     }, []);
+
+    function closeModal(){
+          setModalVisible(false);
+          store.setModalIsShown(true);
+    }
 
     useEffect(() => {
         console.log("switched to home");
@@ -64,6 +74,10 @@ function Home({route,navigation}): React.JSX.Element {
     //when location is obtained show ten nearest places
     useEffect(() => {
         FetchPlaces("",store.myLocation[0],store.initradius,null,10,setLoading,setPlaces,places,false);
+           if(!store.modalIsShown){     
+            setModalVisible(true);      
+           }                            
+
     }, [isLocationObtained]);
 
 
@@ -93,6 +107,26 @@ function Home({route,navigation}): React.JSX.Element {
 
     return (
         <View style={{backgroundColor:'#000000',}}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(false);
+                }}>
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Dear user,</Text>
+                        <Text style={styles.modalText}></Text>
+                        <Text style={styles.modalText}>This app is in development, with many places yet to be added. We'll update it regularly with new locations and features. Feedback is welcome at feedback@qnudsen.com.</Text>
+                        <Pressable
+                            style={styles.button}
+                            onPress={closeModal}>
+                            <Text style={styles.modalText}>OK</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
             <ImageBackground source={require("../../assets/backgrounds/forest.png")} resizeMode="cover" imageStyle={{opacity:0.5}}>
         <SafeAreaView style={styles.mainView}>
             <View >
@@ -383,6 +417,41 @@ const styles = StyleSheet.create({
         fontSize:15,
         fontWeight:"bold",
     },
+
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+    },
+    modalView: {
+        margin: 20,
+        width:"90%",
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        textAlign:"center",
+    },
+    modalText:{
+        fontSize:17,
+        textAlign:"center",
+    },
+    button:{
+        paddingVertical:10,
+        paddingHorizontal:15,
+        backgroundColor:"#B2EAB7",
+        marginTop:20,
+        borderRadius:10,
+    }
 
 });
 

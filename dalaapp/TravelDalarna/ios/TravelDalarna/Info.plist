@@ -44,6 +44,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to provide personalized travel recommendations and real-time guides based on your current surroundings.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+      <string>We need access to your photo library to upload images of new places.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome_Regular.ttf</string>

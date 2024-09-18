@@ -1,6 +1,10 @@
 #import "AppDelegate.h"
 //#import <GoogleMaps/GoogleMaps.h>
+#import "RNSplashScreen.h"  // here
 #import <React/RCTBundleURLProvider.h>
+#import <React/RCTRootView.h>
+
+
 
 
 @implementation AppDelegate
@@ -13,7 +17,11 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
-  return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  [super application:application didFinishLaunchingWithOptions:launchOptions];
+      [RNSplashScreen show];
+ return YES;
+
+ // return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
@@ -29,5 +37,6 @@
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
+
 
 @end

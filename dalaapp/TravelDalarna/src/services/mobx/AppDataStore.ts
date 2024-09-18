@@ -6,14 +6,19 @@ import {CitiesModel} from "../../@types/CitiesModel.ts";
 import {LocationType} from "../../@types/LocationType.ts";
 import {MarkersModel} from "../../@types/MarkersModel.ts";
 import {UserType} from "../../@types/UserType.ts";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useState} from "react";
 
 class AppDataStore{
     constructor() {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {
+
+        },{ autoBind: true })
+       // makeAutoObservable(this);
         makePersistable(this, {
             name: 'SampleStore',
-            properties: ["hasLocationPermission","currentLocation","isLogined","myLocation",],
-            storage: window.localStorage
+            properties: ["hasLocationPermission","currentLocation","isLogined","myLocation","modalIsShown"],
+            storage:  AsyncStorage
         }).then(r => {});
     }
 
@@ -56,6 +61,7 @@ class AppDataStore{
     isSignUp:boolean=false;
 
     isLogined:boolean=false;
+    modalIsShown:boolean=false;
 
 
 
@@ -67,6 +73,9 @@ class AppDataStore{
     }
     setNearestPlaces(items: Array<PlacesModel> ) {
         this.nearestPlaces = items;
+    }
+    setModalIsShown(val: boolean ) {
+        this.modalIsShown= val;
     }
     setChosenCity(items: Array<CitiesModel> ) {
         this.chosenCity = items;
