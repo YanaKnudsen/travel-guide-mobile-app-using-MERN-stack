@@ -1,0 +1,16 @@
+export interface PlaceType {
+    _id:string,
+    title:string,
+    description:string,
+    location:Array<number>,
+    address:string,
+    photos:Array<string>,
+    diet:Array<string>,
+    website:string,
+    facebook:string,
+    instagram:string,
+    categories:Array<string>,
+    id:string,
+    dist:number,
+    __v:number,
+}
